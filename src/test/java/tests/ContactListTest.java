@@ -11,7 +11,7 @@ import utilities.TestBase;
 public class ContactListTest extends TestBase {
 
     @Test
-    public void testContactListFlow() throws InterruptedException {
+    public void testContactListFlow() {
         driver.get(baseUrl);
 
         LoginPage loginPage = new LoginPage(driver);
@@ -41,7 +41,7 @@ public class ContactListTest extends TestBase {
                     "City" + i, "State" + i,
                     "0000" + i, "Country" + i
             );
-            Thread.sleep(500);
+
             Assert.assertTrue(contactListPage.isContactDisplayed(firstName + i, lastName + i),
                     "Contact " + i + " not found!");
         }

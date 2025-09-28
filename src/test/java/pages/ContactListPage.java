@@ -13,7 +13,7 @@ public class ContactListPage{
         this.driver = driver;
     }
 
-    By addContactBtn = By.id("add-contact");
+    By addContactBtn = By.id("d-contact");
     By contactCards = By.className("contactTableBodyRow");
 
     public void clickAddContact() {
