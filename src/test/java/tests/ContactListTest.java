@@ -48,7 +48,7 @@ public class ContactListTest extends TestBase {
             System.out.println("Current URL: " + currentUrl);
 
             if (pageSource.contains("error") || pageSource.contains("Error")) {
-                System.out.println("📄 Page contains error message");
+                System.out.println("Page contains error message");
             }
 
             // Try registration first
