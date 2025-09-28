@@ -9,18 +9,18 @@ public class ConfigReader {
 
     static {
         try {
-
             String path = "configuration.properties";
-            FileInputStream fis = new FileInputStream(path);
+            FileInputStream input = new FileInputStream(path);
             properties = new Properties();
-            properties.load(fis);
-            fis.close();
+            properties.load(input);
+            input.close();
         } catch (IOException e) {
-            throw new RuntimeException("Failed to load configuration.properties!", e);
+            e.printStackTrace();
+            throw new RuntimeException("configuration.properties file not found!");
         }
     }
 
-    public static String getProperty(String key){
+    public static String getProperty(String key) {
         return properties.getProperty(key);
     }
 }

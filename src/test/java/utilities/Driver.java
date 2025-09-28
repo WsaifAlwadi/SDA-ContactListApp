@@ -2,33 +2,38 @@ package utilities;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.safari.SafariDriver;
 
 import java.time.Duration;
 
 public class Driver {
+
     private static WebDriver driver;
 
-    private Driver(){}
+    private Driver() {}
 
-    public static WebDriver getDriver(){
-        if (driver == null){
-            String browser = ConfigReader.getProperty("browser");
+    public static WebDriver getDriver() {
+        if (driver == null) {
+            String browser = ConfigReader.getProperty("browser").toLowerCase();
 
-            switch (browser.toLowerCase()){
+            switch (browser) {
                 case "firefox":
                     driver = new FirefoxDriver();
                     break;
+
                 case "edge":
                     driver = new EdgeDriver();
                     break;
-                case "safari":
-                    driver = new SafariDriver();
+
+                case "headless":
+                    ChromeOptions options = new ChromeOptions();
+                    options.addArguments("--headless", "--disable-gpu", "--window-size=1920,1080");
+                    driver = new ChromeDriver(options);
                     break;
-                case "chrome":
-                default:
+
+                default: // chrome
                     driver = new ChromeDriver();
             }
 
@@ -38,8 +43,8 @@ public class Driver {
         return driver;
     }
 
-    public static void closeDriver(){
-        if (driver != null){
+    public static void closeDriver() {
+        if (driver != null) {
             driver.quit();
             driver = null;
         }

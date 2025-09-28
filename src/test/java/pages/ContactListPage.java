@@ -1,19 +1,36 @@
 package pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import utilities.Driver;
+
 import java.util.List;
 
-public class ContactListPage {
-    public ContactListPage(){
-        PageFactory.initElements(Driver.getDriver(), this);
+public class ContactListPage{
+    WebDriver driver;
+
+    public ContactListPage(WebDriver driver) {
+        this.driver = driver;
     }
 
-    @FindBy(id = "add-contact")
-    public WebElement addContactBtn;
+    By addContactBtn = By.id("add-contact");
+    By contactCards = By.className("contactTableBodyRow");
 
-    @FindBy(css = "table tbody tr")
-    public List<WebElement> contactsRows;
+    public void clickAddContact() {
+        driver.findElement(addContactBtn).click();
+    }
+
+    public boolean isContactDisplayed(String fn, String ln) {
+        List<WebElement> contacts = driver.findElements(contactCards);
+        for (WebElement c : contacts) {
+            if (c.getText().contains(fn) && c.getText().contains(ln)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getContactCount() {
+        return driver.findElements(contactCards).size();
+    }
 }

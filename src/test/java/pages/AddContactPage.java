@@ -1,45 +1,37 @@
 package pages;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import utilities.Driver;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 
 public class AddContactPage {
-    public AddContactPage(){
-        PageFactory.initElements(Driver.getDriver(), this);
+    WebDriver driver;
+
+    public AddContactPage(WebDriver driver) {
+        this.driver = driver;
     }
 
-    @FindBy(id = "firstName")
-    public WebElement firstNameInput;
+    By firstName = By.id("firstName");
+    By lastName = By.id("lastName");
+    By email = By.id("email");
+    By phone = By.id("phone");
+    By street1 = By.id("street1");
+    By city = By.id("city");
+    By stateProvince = By.id("stateProvince");
+    By postalCode = By.id("postalCode");
+    By country = By.id("country");
+    By submit = By.id("submit");
 
-    @FindBy(id = "lastName")
-    public WebElement lastNameInput;
-
-    @FindBy(id = "birthdate")
-    public WebElement birthDateInput;
-
-    @FindBy(id = "email")
-    public WebElement emailInput;
-
-    @FindBy(id = "phone")
-    public WebElement phoneInput;
-
-    @FindBy(id = "street1")
-    public WebElement streetInput;
-
-    @FindBy(id = "city")
-    public WebElement cityInput;
-
-    @FindBy(id = "stateProvince")
-    public WebElement stateInput;
-
-    @FindBy(id = "postalCode")
-    public WebElement postalCodeInput;
-
-    @FindBy(id = "country")
-    public WebElement countryInput;
-
-    @FindBy(id = "submit")
-    public WebElement submitBtn;
+    public void addContact(String fn, String ln, String em, String ph,
+                           String st, String ct, String stt, String pc, String cntry) {
+        driver.findElement(firstName).sendKeys(fn);
+        driver.findElement(lastName).sendKeys(ln);
+        driver.findElement(email).sendKeys(em);
+        driver.findElement(phone).sendKeys(ph);
+        driver.findElement(street1).sendKeys(st);
+        driver.findElement(city).sendKeys(ct);
+        driver.findElement(stateProvince).sendKeys(stt);
+        driver.findElement(postalCode).sendKeys(pc);
+        driver.findElement(country).sendKeys(cntry);
+        driver.findElement(submit).click();
+    }
 }
